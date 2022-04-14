@@ -1,21 +1,38 @@
-import { FC } from 'react';
-import { Link } from 'react-router-dom';
-import './App.css';
-import Main from './main';
+import { FC, SetStateAction, useState } from 'react';
+import { ThemeProvider, ButtonToolbar, Container, Row, Col, Table, Tabs, Tab } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Home from './page/home';
+import Topic from './page/topic';
+
 
 const App: FC = () => {
-  return (
-    <div>
-      <ul>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/topics'>Topics</Link></li>
-        <li><Link to='/settings'>Settings</Link></li>
-      </ul>
-      <hr />
 
-      <Main />
-    </div>
+  const [key, setKey] = useState<string>('stock');
+  return (
+
+    <Container fluid>
+      <Tabs
+        id="controlled-tab"
+        activeKey={key}
+        onSelect={(k: SetStateAction<string>) => setKey(k)}
+        className="mb-2">
+
+        <Tab eventKey="stock" title="Stock">
+          <Home />
+        </Tab>
+        <Tab eventKey="sale" title="Sale">
+          <Topic />
+        </Tab>
+
+      </Tabs>
+    </Container>
   )
 }
+
+// const style = {
+//   // container: { backgroundColor: 'orange' },
+//   col: { margin: '10px' }
+
+// }
 
 export default App;
